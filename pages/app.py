@@ -11,8 +11,8 @@ from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.image import img_to_array, load_img, array_to_img
 
 
-HERE = Path(__file__)
-ROOT = HERE.parent
+HERE = Path(__file__).parent
+# ROOT = HERE.parent
 
 # load model  
 ## 'Path_to/my_model.h5'
