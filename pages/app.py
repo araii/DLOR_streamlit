@@ -16,10 +16,17 @@ HERE = Path(__file__).parent
 
 
 ## 'Path_to/my_model.h5'
-## load model streamlit
-model = tf.keras.models.load_model(HERE / './saved_model/prettyfish_model')
-##  load model local
-# model = tf.keras.models.load_model('saved_model/prettyfish_model')
+
+@st.cache
+def load_model():
+    ## load model local
+    # tf.keras.models.load_model('saved_model/prettyfish_model')
+    ## load model streamlit
+    # 
+    return tf.keras.models.load_model(HERE / './saved_model/prettyfish_model')
+ 
+model = load_model()
+
 
 # class names
 class_names = ['clownfish', 
