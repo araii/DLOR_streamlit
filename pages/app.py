@@ -10,10 +10,12 @@ from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.image import img_to_array, load_img, array_to_img
 
 
+HERE = Path(__file__)
+ROOT = HERE.parent
 
 # load model  
 ## 'Path_to/my_model.h5'
-model = tf.keras.models.load_model('saved_model/prettyfish_model')
+model = tf.keras.models.load_model(HERE / './saved_model/prettyfish_model')
 
 # class names
 class_names = ['clownfish', 
