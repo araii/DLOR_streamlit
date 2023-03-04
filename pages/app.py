@@ -1,5 +1,5 @@
 import streamlit as st
-from streamlit_webrtc import webrtc_streamer
+from streamlit_webrtc import WebRtcMode, webrtc_streamer
 from pathlib import Path
 import av
 import cv2
@@ -14,9 +14,12 @@ from tensorflow.keras.preprocessing.image import img_to_array, load_img, array_t
 HERE = Path(__file__).parent
 # ROOT = HERE.parent
 
-# load model  
+
 ## 'Path_to/my_model.h5'
+## load model streamlit
 model = tf.keras.models.load_model(HERE / './saved_model/prettyfish_model')
+##  load model local
+# model = tf.keras.models.load_model('saved_model/prettyfish_model')
 
 # class names
 class_names = ['clownfish', 
@@ -42,16 +45,16 @@ def process_img (img):
     # matrix - 2 Dimension tensor i.e (1, 6)
     # output of tf.nn.softmax() is tf.EagerTensor
     proba = tf.nn.softmax(logits) 
-    threshold = 0.9
+    # threshold = 0.9
     ## numpy() - converts tf.EagerTensor into np.array
     ## np.any() - any of the ele is true, return true
-    if (proba > threshold).numpy().any():  
-        predict_output = tf.argmax(logits, -1).numpy()
-    else:
-        predict_output = [6]
+    # if (proba > threshold).numpy().any():  
+    #     predict_output = tf.argmax(logits, -1).numpy()
+    # else:
+    #     predict_output = [6]
     ## Mars End....
     ## run thru classifier to get name
-    pred_text = class_names[predict_output[0]]   # running every frame...
+    # pred_text = class_names[predict_output[0]]   # running every frame...
     ##---------------------------##
     ## resize image
     # img = tf.keras.utils.load_img(img, target_size=(299,299))
@@ -60,7 +63,8 @@ def process_img (img):
     # y_pred = model.predict(test_img, verbose=1)[0]
     # y_pred_class = np.argmax(y_pred)
     # y_pred_prob = y_pred[y_pred_class]*100
-    return pred_text, proba   # extract proba
+    pred_text=""
+    return pred_text, proba   # extract proba   
     
 
 st.title("My first streamlit app")
@@ -114,7 +118,7 @@ def videoFilter(frame: av.VideoFrame) -> av.VideoFrame:
 
 webrtc_ctx = webrtc_streamer (
     key="prettyfish",
-    # mode=WebRtcMode.SENDRECV,
+    mode=WebRtcMode.SENDRECV,
     video_frame_callback = videoFilter,
     rtc_configuration = { #Add this line
         "iceServers": [{"urls":["stun:stun.l.google.com:19302"]}]
@@ -149,4 +153,4 @@ if st.checkbox("Show logits", value=True):
                 fish_class = class_names[avg.argmax()]
             else:
                 fish_class = "not a fish"
-            labels_placeholder.table(pd.DataFrame({"fish":[fish_class]}))
+                labels_placeholder.table(pd.DataFrame({"fish":[fish_class]}))
