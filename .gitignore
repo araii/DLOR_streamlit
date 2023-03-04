@@ -143,3 +143,8 @@ cython_debug/
 models/
 data/
 *.flv
+
+
+# edit
+.github/
+.flake8
