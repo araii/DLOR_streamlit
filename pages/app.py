@@ -17,7 +17,7 @@ HERE = Path(__file__).parent
 
 ## 'Path_to/my_model.h5'
 
-@st.cache
+@st.cache_resource
 def load_model():
     ## load model local
     # tf.keras.models.load_model('saved_model/prettyfish_model')
