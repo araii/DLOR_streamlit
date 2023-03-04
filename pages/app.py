@@ -155,9 +155,10 @@ if st.checkbox("Show logits", value=True):
                 probas = probas[1:]
             avg = np.array(probas).mean(axis=0) # avg of last 5 probas
             # labels_placeholder.table(avg)  # display probas
-            # labels_placeholder.table(pd.DataFrame({"fish":[class_names[avg.argmax()]]}))  # display class
+            # # labels_placeholder.table(pd.DataFrame({"fish":[class_names[avg.argmax()]]}))  # display class
             if (avg>threshold).any():
                 fish_class = class_names[avg.argmax()]
             else:
                 fish_class = "not a fish"
-                labels_placeholder.table(pd.DataFrame({"fish":[fish_class]}))
+            
+            labels_placeholder.table(pd.DataFrame({"fish":[fish_class]}))
