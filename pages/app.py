@@ -128,7 +128,7 @@ webrtc_ctx = webrtc_streamer (
     mode=WebRtcMode.SENDRECV,
     video_frame_callback = videoFilter,
     rtc_configuration = { #Add this line
-        "iceServers": [{"urls":["stun:stun2.l.google.com:19302"]}]   # , stun.l.google.com:19302
+        "iceServers": [{"urls":["stun:iphone-stun.strato-iphone.de:3478"]}]   # , stun.l.google.com:19302, stun4.l.google.com:19302
     },
     media_stream_constraints={"video": True, "audio": False},
     async_processing=True,
