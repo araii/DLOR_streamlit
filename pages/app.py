@@ -79,7 +79,7 @@ def process_img (img):
     
 
 st.title("My first streamlit app")
-st.write("Hello, world-7")
+st.write("Hello, world-8")
 
 
 font = cv2.FONT_HERSHEY_SIMPLEX
