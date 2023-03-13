@@ -128,11 +128,11 @@ def videoFilter(frame: av.VideoFrame) -> av.VideoFrame:
 
 
 webrtc_ctx = webrtc_streamer (
-    key="knnbccb",
+    key="wtf666",
     mode=WebRtcMode.SENDRECV,
     video_frame_callback = videoFilter,
     rtc_configuration = { #Add this line
-        "iceServers": [{"urls":["stun:stun.l.google.com:19302"]}]   # stun2.l.google.com:19302
+        "iceServers": [{"urls":["stun:stun.l.google.com:19302", "stun2.l.google.com:19305"]}]   # stun2.l.google.com:19302
     },
     media_stream_constraints={"video": True, "audio": False},
     async_processing=True,
