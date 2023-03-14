@@ -105,7 +105,7 @@ webrtc_ctx = webrtc_streamer (
     mode=WebRtcMode.SENDRECV,
     video_frame_callback = videoFilter,
     rtc_configuration = { #Add this line
-        "iceServers": [{"urls":["stun:stun.l.google.com:19302"]}]
+        "iceServers": [{"urls":["stun:192.168.68.101:3478"]}]#stun.l.google.com:19302
     },
     media_stream_constraints={"video": True, "audio": False},
     async_processing=True,
