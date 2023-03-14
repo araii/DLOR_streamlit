@@ -89,7 +89,7 @@ def process_img (img):
     
 
 st.title("Prettyfish classifier")
-st.write("Version 15")
+st.write("Version 14")
 
 font = cv2.FONT_HERSHEY_SIMPLEX
 bottomLeftCornerOfText = (10,40)
@@ -164,30 +164,30 @@ webrtc_ctx = webrtc_streamer (
     mode=WebRtcMode.SENDRECV,
     video_frame_callback = videoFilter,
     rtc_configuration = { # --Add this line--
-        "iceServers": [{"urls":["stun:103.6.151.242:3478"]}] 
+        # "iceServers": [{"urls":["stun:103.6.151.242:3478"]}] 
         # "iceServers": [{"urls":["stun:stunserver.stunprotocol.org:3478",
         #                         "stun:stun2.l.google.com:19302",
         #                         "stun:stun.l.google.com:19302"]}]  
-        # "iceServers":[
-        #     {
-        #         "urls":["stun:openrelay.metered.ca:80"]
-        #     },
-        #     {
-        #         "urls":["turn:openrelay.metered.ca:80"],
-        #         "username":"openrelayproject",
-        #         "credential":"openrelayproject"
-        #     },
-        #     {
-        #         "urls":["turn:openrelay.metered.ca:443"],
-        #         "username":"openrelayproject",
-        #         "credential":"openrelayproject"
-        #     },
-        #     {
-        #         "urls": "turn:openrelay.metered.ca:443?transport=tcp",
-        #         "username": "openrelayproject",
-        #         "credential": "openrelayproject",
-        #     },
-        # ]
+        "iceServers":[
+            {
+                "urls":["stun:openrelay.metered.ca:80"]
+            },
+            {
+                "urls":["turn:openrelay.metered.ca:80"],
+                "username":"openrelayproject",
+                "credential":"openrelayproject"
+            },
+            {
+                "urls":["turn:openrelay.metered.ca:443"],
+                "username":"openrelayproject",
+                "credential":"openrelayproject"
+            },
+            {
+                "urls": "turn:openrelay.metered.ca:443?transport=tcp",
+                "username": "openrelayproject",
+                "credential": "openrelayproject",
+            },
+        ]
     },
     media_stream_constraints={"video": True, "audio": False},
     async_processing=True,
