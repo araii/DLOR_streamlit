@@ -79,7 +79,7 @@ def process_img (img):
     
 
 st.title("My first streamlit app")
-st.write("Hello, world-12")
+st.write("Hello, world-13")
 
 
 font = cv2.FONT_HERSHEY_SIMPLEX
@@ -99,13 +99,13 @@ def videoFilter(frame: av.VideoFrame) -> av.VideoFrame:
     # detect model here!
     pred_text, proba = process_img(img)
     text =  "HELLO! "+ pred_text     # text to print 
-    # cv2.putText(img, 
-    #             text,
-    #             bottomLeftCornerOfText,
-    #             font, 
-    #             fontScale, 
-    #             fontColor, 
-    #             lineType)
+    cv2.putText(img, 
+                text,
+                bottomLeftCornerOfText,
+                font, 
+                fontScale, 
+                fontColor, 
+                lineType)
     result_queue.put(proba)
     return av.VideoFrame.from_ndarray(img, format="bgr24")
 
