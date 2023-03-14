@@ -126,15 +126,16 @@ def videoFilter(frame: av.VideoFrame) -> av.VideoFrame:
 # the value of the rtc_configuration argument will be passed to
 # the RTCPeerConnection constructor on the frontend.
 
+# "stun:stunserver.stunprotocol.org:3478",
+#                                 "stun:stun2.l.google.com:19302",
+#                                 "stun:stun.l.google.com:19302"
 
 webrtc_ctx = webrtc_streamer (
     key="wtf666",
     mode=WebRtcMode.SENDRECV,
     video_frame_callback = videoFilter,
     rtc_configuration = { #Add this line
-        "iceServers": [{"urls":["stun:stunserver.stunprotocol.org:3478",
-                                "stun:stun2.l.google.com:19302",
-                                "stun:stun.l.google.com:19302"]}]  
+        "iceServers": [{"urls":["turn:openrelay.metered.ca:80[openrelayproject:openrelayproject]"]}]  
     },
     media_stream_constraints={"video": True, "audio": False},
     async_processing=True,
