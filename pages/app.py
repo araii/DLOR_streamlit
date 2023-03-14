@@ -79,7 +79,7 @@ def process_img (img):
     
 
 st.title("My first streamlit app")
-st.write("Hello, world-9")
+st.write("Hello, world-10")
 
 
 font = cv2.FONT_HERSHEY_SIMPLEX
@@ -132,7 +132,9 @@ webrtc_ctx = webrtc_streamer (
     mode=WebRtcMode.SENDRECV,
     video_frame_callback = videoFilter,
     rtc_configuration = { #Add this line
-        "iceServers": [{"urls":["stun:stunserver.stunprotocol.org:3478"]}]   # stun2.l.google.com:19302, stun:stun.l.google.com:19302
+        "iceServers": [{"urls":["stun:stunserver.stunprotocol.org:3478",
+                                "stun:stun2.l.google.com:19302",
+                                "stun:stun.l.google.com:19302"]}]  
     },
     media_stream_constraints={"video": True, "audio": False},
     async_processing=True,
