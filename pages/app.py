@@ -89,7 +89,7 @@ def process_img (img):
     
 
 st.title("Prettyfish classifier")
-st.write("Version 17")
+st.write("Version 18")
 
 font = cv2.FONT_HERSHEY_SIMPLEX
 bottomLeftCornerOfText = (10,40)
@@ -170,7 +170,8 @@ webrtc_ctx = webrtc_streamer (
         #                         "stun:stun.l.google.com:19302"]}]  
         "iceServers":[
             {
-                "urls":["stun:openrelay.metered.ca:80"]
+                "urls":["stun:openrelay.metered.ca:80",
+                        "stun:global.stun.twilio.com:3478"]
             },
             {
                 "urls":["turn:openrelay.metered.ca:80"],
@@ -178,15 +179,20 @@ webrtc_ctx = webrtc_streamer (
                 "credential":"openrelayproject"
             },
             {
-                "urls":["turn:openrelay.metered.ca:443"],
-                "username":"openrelayproject",
-                "credential":"openrelayproject"
+                "urls":["turn:openrelay.metered.ca:80"],
+                "username":"72c8c4b983ddfbcba88d99c4",
+                "credential":"YuhOl7yVpMcWIV87"
             },
             {
-                "urls": "turn:openrelay.metered.ca:443?transport=tcp",
-                "username": "openrelayproject",
-                "credential": "openrelayproject",
+                "urls":["turn:openrelay.metered.ca:443"],
+                "username":"72c8c4b983ddfbcba88d99c4",
+                "credential":"YuhOl7yVpMcWIV87"
             },
+            # {
+            #     "urls": "turn:openrelay.metered.ca:443?transport=tcp",
+            #     "username": "openrelayproject",
+            #     "credential": "openrelayproject",
+            # },
         ]
     },
     media_stream_constraints={"video": True, "audio": False},
