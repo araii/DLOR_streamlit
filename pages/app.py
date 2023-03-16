@@ -89,7 +89,7 @@ def process_img (img):
     
 
 st.title("Prettyfish classifier")
-st.write("Version 16")
+st.write("Version 17")
 
 font = cv2.FONT_HERSHEY_SIMPLEX
 bottomLeftCornerOfText = (10,40)
