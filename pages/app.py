@@ -89,7 +89,7 @@ def process_img (img):
     
 
 st.title("Prettyfish classifier")
-st.write("Version 17")
+st.write("Version 18")
 
 font = cv2.FONT_HERSHEY_SIMPLEX
 bottomLeftCornerOfText = (10,40)
@@ -168,26 +168,26 @@ webrtc_ctx = webrtc_streamer (
         # "iceServers": [{"urls":["stun:stunserver.stunprotocol.org:3478",
         #                         "stun:stun2.l.google.com:19302",
         #                         "stun:stun.l.google.com:19302"]}]  
-        "iceServers":[
-            {
-                "urls":["stun:openrelay.metered.ca:80"]
-            },
-            {
-                "urls":["turn:openrelay.metered.ca:80"],
-                "username":"openrelayproject",
-                "credential":"openrelayproject"
-            },
-            {
-                "urls":["turn:openrelay.metered.ca:443"],
-                "username":"openrelayproject",
-                "credential":"openrelayproject"
-            },
-            {
-                "urls": "turn:openrelay.metered.ca:443?transport=tcp",
-                "username": "openrelayproject",
-                "credential": "openrelayproject",
-            },
-        ]
+          iceServers: [
+              {
+                urls: "stun:relay.metered.ca:80",
+              },
+              {
+                urls: "turn:relay.metered.ca:80",
+                username: "72c8c4b983ddfbcba88d99c4",
+                credential: "YuhOl7yVpMcWIV87",
+              },
+              {
+                urls: "turn:relay.metered.ca:443",
+                username: "72c8c4b983ddfbcba88d99c4",
+                credential: "YuhOl7yVpMcWIV87",
+              },
+              {
+                urls: "turn:relay.metered.ca:443?transport=tcp",
+                username: "72c8c4b983ddfbcba88d99c4",
+                credential: "YuhOl7yVpMcWIV87",
+              },
+          ],
     },
     media_stream_constraints={"video": True, "audio": False},
     async_processing=True,
