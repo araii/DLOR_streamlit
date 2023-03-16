@@ -89,7 +89,7 @@ def process_img (img):
     
 
 st.title("Prettyfish classifier")
-st.write("Version 18")
+st.write("Version 17")
 
 font = cv2.FONT_HERSHEY_SIMPLEX
 bottomLeftCornerOfText = (10,40)
@@ -187,8 +187,7 @@ webrtc_ctx = webrtc_streamer (
                 "username": "openrelayproject",
                 "credential": "openrelayproject",
             },
-        ],
-        ,"iceTransportPolicy":"all"
+        ]
     },
     media_stream_constraints={"video": True, "audio": False},
     async_processing=True,
