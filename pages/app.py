@@ -89,7 +89,7 @@ def process_img (img):
     
 
 st.title("Prettyfish classifier")
-st.write("Version 22")
+st.write("Version 23 streamlit==1.18.0, streamlit_webrtc==0.44.6")
 
 font = cv2.FONT_HERSHEY_SIMPLEX
 bottomLeftCornerOfText = (10,40)
