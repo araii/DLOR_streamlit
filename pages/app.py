@@ -89,7 +89,7 @@ def process_img (img):
     
 
 st.title("Prettyfish classifier")
-st.write("streamlit==1.19.0 | streamlit_webrtc==0.45.0 | stun+turn+key | modelv1")
+st.write("streamlit==1.19.0 | streamlit_webrtc==0.45.0 | stun+turn+tcp | modelv1")
 
 font = cv2.FONT_HERSHEY_SIMPLEX
 bottomLeftCornerOfText = (10,40)
@@ -169,10 +169,10 @@ webrtc_ctx = webrtc_streamer (
             {
                 "urls":[#"stun:openrelay.metered.ca:80",
                         "stun:stun.l.google.com:19302",
-                        "turn:openrelay.metered.ca:80"
+                        "turn:openrelay.metered.ca:443?transport=tcp",
                        ],
-                "username":"openrelayproject",
-                "credential":"openrelayproject"
+                "username":"6b5543aef5255ed431083a10",
+                "credential":"dDGwNclpzebJ+wpG"
                 
             },
             # {
