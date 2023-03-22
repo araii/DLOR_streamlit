@@ -22,10 +22,10 @@ HERE = Path(__file__).parent
 @st.cache_resource    
 def load_model():
     # --load model local--
-    # tf.keras.models.load_model('saved_model/prettyfish_model')
-    # --load model streamlit--
     # 
-    return tf.keras.models.load_model(HERE / './saved_model/prettyfish_model')
+    # --load model streamlit--
+    # tf.keras.models.load_model(HERE / './saved_model/prettyfish_modelv1')
+    return tf.keras.models.load_model('saved_model/prettyfish_modelv1')
  
 model = load_model()
 
@@ -33,13 +33,13 @@ model = load_model()
 
 
 # class names
-class_names = ['clownfish', 
+class_names = ['clownfish',
                'longnose_butterflyfish',
+               'not_a_fish',
                'oranda_goldfish',
                'powder_blue_tang',
                'queen_angelfish',
-               'snakeskin_discus',
-               'cuddlefish'] # Mars
+               'snakeskin_discus']
 
 
 
@@ -89,7 +89,7 @@ def process_img (img):
     
 
 st.title("Prettyfish classifier")
-st.write("streamlit==1.18.0, streamlit_webrtc==0.44.7 stun+turn+key")
+st.write("streamlit==1.19.0 | streamlit_webrtc==0.45.0 | stun+turn+key | modelv1")
 
 font = cv2.FONT_HERSHEY_SIMPLEX
 bottomLeftCornerOfText = (10,40)
@@ -105,7 +105,6 @@ lineType = 2
 
 ## init queue, queue.put(value), queue.get(value)
 result_queue: "queue.Queue[]" = queue.Queue()  
-# fish_class_queue: "queue.Queue[]" = queue.Queue() # not working, can't put 2 queues..
 fish = ""
 
 
@@ -130,7 +129,6 @@ def videoFilter(frame: av.VideoFrame) -> av.VideoFrame:
     img = frame.to_ndarray(format="bgr24")
     # --detect model here--
     pred_text, proba = process_img(img)
-    # fish_class = fish_class_queue.get() 
     text =  "HELLO! " + fish
     # --text to print--   
     cv2.putText(img, 
@@ -140,7 +138,6 @@ def videoFilter(frame: av.VideoFrame) -> av.VideoFrame:
                 fontScale, 
                 fontColor, 
                 lineType)
-    # fish_class_queue.task_done()
     result_queue.put(proba)
     return av.VideoFrame.from_ndarray(img, format="bgr24")
 
@@ -171,14 +168,18 @@ webrtc_ctx = webrtc_streamer (
         "iceServers":[
             {
                 "urls":[#"stun:openrelay.metered.ca:80",
-                        "stun:stun.l.google.com:19302"
-                       ]
+                        "stun:stun.l.google.com:19302",
+                        "turn:openrelay.metered.ca:80"
+                       ],
+                "username":"openrelayproject",
+                "credential":"openrelayproject"
+                
             },
-            {
-                "urls":["turn:openrelay.metered.ca:443"],
-                "username":"72c8c4b983ddfbcba88d99c4",
-                "credential":"YuhOl7yVpMcWIV87"
-            },
+            # {
+            #     "urls":[],
+            #     "username":"72c8c4b983ddfbcba88d99c4",
+            #     "credential":"YuhOl7yVpMcWIV87"
+            # },
             # {
             #     "urls":["turn:openrelay.metered.ca:443"],
             #     "username":"72c8c4b983ddfbcba88d99c4",
@@ -222,7 +223,7 @@ if st.checkbox("Show logits", value=True):
         threshold = 0.9
         while True:
             result = result_queue.get()
-            probas.append(tf.reshape(result, [6]))
+            probas.append(tf.reshape(result, [7]))
             # --keep last 5 frames--
             if len(probas) > 10:     
                 probas = probas[1:]
@@ -235,8 +236,8 @@ if st.checkbox("Show logits", value=True):
             # --any avg of the ele is more than threshold, return true-- 
             if (avg>threshold).any():
                 fish_class = class_names[avg.argmax()]
-            else:
-                fish_class = "not a fish"
+            # else:
+            #     fish_class = "not a fish"
             # fish_class_queue.put(fish_class) 
             fish = fish_class
             labels_placeholder.table(pd.DataFrame({"fish":[fish_class]}))
