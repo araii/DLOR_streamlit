@@ -176,8 +176,8 @@ webrtc_ctx = webrtc_streamer (
             },
             {
                 "urls":["turn:openrelay.metered.ca:80"],
-                "username":"openrelayproject",
-                "credential":"openrelayproject"
+                "username":"72c8c4b983ddfbcba88d99c4",
+                "credential":"YuhOl7yVpMcWIV87"
             },
             # {
             #     "urls":["turn:openrelay.metered.ca:443"],
