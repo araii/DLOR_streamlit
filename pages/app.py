@@ -89,7 +89,7 @@ def process_img (img):
     
 
 st.title("Prettyfish classifier")
-st.write("streamlit==1.18.0, streamlit_webrtc==0.44.7 stun+turn")
+st.write("streamlit==1.18.0, streamlit_webrtc==0.44.7 stun+turn+key")
 
 font = cv2.FONT_HERSHEY_SIMPLEX
 bottomLeftCornerOfText = (10,40)
@@ -160,7 +160,7 @@ def videoFilter(frame: av.VideoFrame) -> av.VideoFrame:
 ## the value of the rtc_configuration argument will be passed to
 ## the RTCPeerConnection constructor on the frontend.
 webrtc_ctx = webrtc_streamer (
-    key="pf1234325346",
+    key="11Wr26Gyl7lZ1RaEbDeHV5oZwLi5frlhBizOrC4MxmfG5qjT",
     mode=WebRtcMode.SENDRECV,
     video_frame_callback = videoFilter,
     rtc_configuration = { # --Add this line--
@@ -175,7 +175,7 @@ webrtc_ctx = webrtc_streamer (
                        ]
             },
             {
-                "urls":["turn:openrelay.metered.ca:80"],
+                "urls":["turn:openrelay.metered.ca:443"],
                 "username":"72c8c4b983ddfbcba88d99c4",
                 "credential":"YuhOl7yVpMcWIV87"
             },
