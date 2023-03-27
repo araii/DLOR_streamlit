@@ -89,7 +89,7 @@ def process_img (img):
     
 
 st.title("Prettyfish classifier")
-st.write("streamlit==1.19.0 | streamlit_webrtc==0.45.0 | stun+turn+tcp | modelv1")
+st.write("streamlit==1.19.0 | streamlit_webrtc==0.45.0 | xirsys | modelv1")
 
 font = cv2.FONT_HERSHEY_SIMPLEX
 bottomLeftCornerOfText = (10,40)
@@ -157,33 +157,43 @@ def videoFilter(frame: av.VideoFrame) -> av.VideoFrame:
 ## the value of the rtc_configuration argument will be passed to
 ## the RTCPeerConnection constructor on the frontend.
 webrtc_ctx = webrtc_streamer (
-    key="11Wr26Gyl7lZ1RaEbDeHV5oZwLi5frlhBizOrC4MxmfG5qjT",
+    key="prettyfish2345",
     mode=WebRtcMode.SENDRECV,
     video_frame_callback = videoFilter,
-    rtc_configuration = { # --Add this line--
+    rtc_configuration = { 
+        # --Add this line--
         # "iceServers": [{"urls":["stun:103.6.151.242:3478"]}] 
         # "iceServers": [{"urls":["stun:stunserver.stunprotocol.org:3478",
         #                         "stun:stun2.l.google.com:19302",
         #                         "stun:stun.l.google.com:19302"]}]  
         "iceServers":[
             {
-                "urls":[#"stun:openrelay.metered.ca:80",
-                        "stun:stun.l.google.com:19302",
-                        "turn:openrelay.metered.ca:443?transport=tcp",
-                       ],
-                "username":"6b5543aef5255ed431083a10",
-                "credential":"dDGwNclpzebJ+wpG"
-                
+                "urls":[ #"stun:openrelay.metered.ca:80",
+                         #"stun:stun.l.google.com:19302",
+                         "stun:hk-turn1.xirsys.com"
+                       ]               
             },
+            {
+                "username": "Iy1RO4E0429UUzReltaix02EB-QqhiQ9JT_6Es2ShxeYEusv-tIMoBg0bm18RvcIAAAAAGQhIKhsanJp",
+                "credential": "f178fd36-cc5a-11ed-b629-0242ac120004",
+                "urls": [
+                    "turn:hk-turn1.xirsys.com:80?transport=udp",
+                    "turn:hk-turn1.xirsys.com:3478?transport=udp",
+                    "turn:hk-turn1.xirsys.com:80?transport=tcp",
+                    "turn:hk-turn1.xirsys.com:3478?transport=tcp",
+                    "turns:hk-turn1.xirsys.com:443?transport=tcp",
+                    "turns:hk-turn1.xirsys.com:5349?transport=tcp"
+                ] 
+            }
             # {
-            #     "urls":[],
-            #     "username":"72c8c4b983ddfbcba88d99c4",
-            #     "credential":"YuhOl7yVpMcWIV87"
+            #     "urls":["turn:openrelay.metered.ca:443?transport=tcp"],
+            #     "username":"6b5543aef5255ed431083a10",
+            #     "credential":"dDGwNclpzebJ+wpG"
             # },
             # {
             #     "urls":["turn:openrelay.metered.ca:443"],
-            #     "username":"72c8c4b983ddfbcba88d99c4",
-            #     "credential":"YuhOl7yVpMcWIV87"
+            #     "username":"6b5543aef5255ed431083a10",
+            #     "credential":"dDGwNclpzebJ+wpG"
             # },
             # {
             #     "urls": "turn:openrelay.metered.ca:443?transport=tcp",
@@ -220,7 +230,7 @@ if st.checkbox("Show logits", value=True):
     if webrtc_ctx.state.playing:
         labels_placeholder = st.empty()
         probas = []
-        threshold = 0.9
+        threshold = 0.8
         while True:
             result = result_queue.get()
             probas.append(tf.reshape(result, [7]))
