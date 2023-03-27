@@ -89,7 +89,7 @@ def process_img (img):
     
 
 st.title("Prettyfish classifier")
-st.write("streamlit==1.19.0 | streamlit_webrtc==0.45.0 | xirsys | modelv1")
+st.write("streamlit==1.19.0 | streamlit_webrtc==0.45.0 | xirsys TURN| modelv1")
 
 font = cv2.FONT_HERSHEY_SIMPLEX
 bottomLeftCornerOfText = (10,40)
@@ -167,24 +167,25 @@ webrtc_ctx = webrtc_streamer (
         #                         "stun:stun2.l.google.com:19302",
         #                         "stun:stun.l.google.com:19302"]}]  
         "iceServers":[
-            {
-                "urls":[ #"stun:openrelay.metered.ca:80",
-                         #"stun:stun.l.google.com:19302",
-                         "stun:hk-turn1.xirsys.com"
-                       ]               
-            },
+            # {
+            #     "urls":[ #"stun:openrelay.metered.ca:80",
+            #              #"stun:stun.l.google.com:19302",
+            #              "stun:hk-turn1.xirsys.com"
+            #            ]               
+            # },
             {
                 "username": "Iy1RO4E0429UUzReltaix02EB-QqhiQ9JT_6Es2ShxeYEusv-tIMoBg0bm18RvcIAAAAAGQhIKhsanJp",
                 "credential": "f178fd36-cc5a-11ed-b629-0242ac120004",
                 "urls": [
-                    "turn:hk-turn1.xirsys.com:80?transport=tcp",
-                    "turn:hk-turn1.xirsys.com:3478?transport=tcp",
-                    "turns:hk-turn1.xirsys.com:443?transport=tcp",
-                    "turns:hk-turn1.xirsys.com:5349?transport=tcp",
-                    "turn:hk-turn1.xirsys.com:80?transport=udp",
-                    "turn:hk-turn1.xirsys.com:3478?transport=udp",
+                    # "turn:hk-turn1.xirsys.com:80?transport=tcp",
+                    # "turn:hk-turn1.xirsys.com:3478?transport=tcp",
+                    "turn:hk-turn1.xirsys.com:443",   #?transport=tcp
+                    # "turns:hk-turn1.xirsys.com:5349?transport=tcp",
+                    # "turn:hk-turn1.xirsys.com:80?transport=udp",
+                    # "turn:hk-turn1.xirsys.com:3478?transport=udp",
                 ] 
-            }
+            },
+            
             # {
             #     "urls":["turn:openrelay.metered.ca:443?transport=tcp"],
             #     "username":"6b5543aef5255ed431083a10",
@@ -200,7 +201,8 @@ webrtc_ctx = webrtc_streamer (
             #     "username": "openrelayproject",
             #     "credential": "openrelayproject",
             # },
-        ]
+        ],
+        "iceTransportPolicy":"relay"
     },
     media_stream_constraints={"video": True, "audio": False},
     async_processing=True,
